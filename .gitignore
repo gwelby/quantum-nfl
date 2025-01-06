@@ -1,0 +1,50 @@
+# 🛡️ Security-related
+*.key
+*.pem
+.env
+.env.*
+credentials/
+secrets/
+*password*
+*secret*
+
+# 🧪 Development
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 📊 Data and logs
+logs/
+*.log
+data/raw/
+data/processed/
+*.dat
+
+# 🎵 IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 🌟 Quantum specific
+qiskit-jobs/
+quantum-states/
+calibration-data/

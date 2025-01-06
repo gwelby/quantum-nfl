@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Quantum Game Simulator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <nav class="bg-green-600 text-white p-4 fixed w-full top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">NFL Quantum Simulator</h1>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-lg hover:bg-green-700">
+                    🌓
+                </button>
+                <a href="index.html" class="hover:text-gray-200">Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto pt-20 px-4">
+        <section id="game-setup" class="py-8">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-4">Game Setup</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-700 dark:text-gray-300 mb-2">Home Team</label>
+                        <div class="relative">
+                            <select id="home-team" class="w-full p-2 border rounded bg-white dark:bg-gray-700">
+                                <!-- Teams will be populated by JavaScript -->
+                            </select>
+                            <div id="home-team-icon" class="absolute right-8 top-2 text-2xl"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 dark:text-gray-300 mb-2">Away Team</label>
+                        <div class="relative">
+                            <select id="away-team" class="w-full p-2 border rounded bg-white dark:bg-gray-700">
+                                <!-- Teams will be populated by JavaScript -->
+                            </select>
+                            <div id="away-team-icon" class="absolute right-8 top-2 text-2xl"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-center">
+                    <button id="start-game" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transform hover:scale-105 transition-all">
+                        Start Simulation
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="game-simulation" class="py-8 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="text-center mb-6">
+                    <div class="flex justify-center items-center space-x-4">
+                        <div id="home-team-display" class="text-2xl"></div>
+                        <h2 class="text-4xl font-bold" id="score-display">0 - 0</h2>
+                        <div id="away-team-display" class="text-2xl"></div>
+                    </div>
+                    <p class="text-xl mt-2" id="quarter-display">1st Quarter - 15:00</p>
+                </div>
+
+                <div class="relative w-full h-32 bg-green-800 rounded-lg mb-6">
+                    <div id="field-position-marker" class="absolute top-0 w-4 h-8 bg-yellow-400 transition-all duration-500"></div>
+                    <div class="absolute top-0 left-0 w-full h-full flex justify-between px-4 items-center text-white">
+                        <span>0</span>
+                        <span>50</span>
+                        <span>100</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                        <h3 class="font-bold mb-2">Current Drive</h3>
+                        <p id="drive-info" class="text-lg"></p>
+                        <div id="down-and-distance" class="mt-2">
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div id="yards-progress" class="bg-green-600 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                        <h3 class="font-bold mb-2">Last Play</h3>
+                        <p id="last-play" class="text-lg">Waiting to start...</p>
+                        <div id="quantum-momentum" class="mt-2">
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                <div id="momentum-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 50%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border-t pt-6">
+                        <h3 class="font-bold mb-4">Play by Play</h3>
+                        <div id="play-by-play" class="h-64 overflow-y-auto space-y-2 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <!-- Plays will be added here -->
+                        </div>
+                    </div>
+                    <div class="border-t pt-6">
+                        <h3 class="font-bold mb-4">Live Charts</h3>
+                        <canvas id="stats-chart" class="w-full h-64"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="game-stats" class="py-8 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-4">Game Statistics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <h3 class="font-bold mb-2">Offense</h3>
+                        <div class="space-y-2">
+                            <div class="stat-item">
+                                <span>Total Yards</span>
+                                <span id="total-yards">0</span>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div id="total-yards-bar" class="bg-blue-600 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span>Passing Yards</span>
+                                <span id="passing-yards">0</span>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div id="passing-yards-bar" class="bg-green-600 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span>Rushing Yards</span>
+                                <span id="rushing-yards">0</span>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div id="rushing-yards-bar" class="bg-yellow-600 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2">Defense</h3>
+                        <div class="space-y-2">
+                            <div class="stat-item">
+                                <span>Sacks</span>
+                                <span id="sacks">0</span>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div id="sacks-bar" class="bg-red-600 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span>Interceptions</span>
+                                <span id="interceptions">0</span>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div id="interceptions-bar" class="bg-purple-600 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span>Fumbles Recovered</span>
+                                <span id="fumbles">0</span>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div id="fumbles-bar" class="bg-orange-600 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2">Special Teams</h3>
+                        <div class="space-y-2">
+                            <div class="stat-item">
+                                <span>Field Goals</span>
+                                <span id="field-goals">0/0</span>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div id="field-goals-bar" class="bg-indigo-600 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span>Punts</span>
+                                <span id="punts">0</span>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div id="punts-bar" class="bg-pink-600 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span>Return Yards</span>
+                                <span id="return-yards">0</span>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div id="return-yards-bar" class="bg-teal-600 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script src="teams.js"></script>
+    <script src="simulator.js"></script>
+</body>
+</html>

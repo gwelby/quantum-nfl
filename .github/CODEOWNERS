@@ -1,0 +1,47 @@
+# Global code owners
+* @quantum-nfl/core-team
+
+# Documentation owners
+/docs/ @quantum-nfl/docs-team
+*.md @quantum-nfl/docs-team
+
+# Core quantum components
+/src/quantum/ @quantum-nfl/quantum-team
+/src/core/ @quantum-nfl/quantum-team
+
+# Neural evolution system
+/src/neural/ @quantum-nfl/neural-team
+
+# Reality manipulation system
+/src/reality/ @quantum-nfl/reality-team
+
+# Music integration
+/src/music/ @quantum-nfl/music-team
+
+# Security components
+/src/security/ @quantum-nfl/security-team
+/tests/test_security.py @quantum-nfl/security-team
+
+# Testing framework
+/tests/ @quantum-nfl/qa-team
+
+# CI/CD and automation
+/.github/workflows/ @quantum-nfl/devops-team
+/tools/ @quantum-nfl/devops-team
+
+# Mobile app
+/src/mobile/ @quantum-nfl/mobile-team
+
+# Web interface
+/src/dashboard/ @quantum-nfl/web-team
+/website/ @quantum-nfl/web-team
+
+# Configuration files
+*.yml @quantum-nfl/devops-team
+*.yaml @quantum-nfl/devops-team
+requirements.txt @quantum-nfl/devops-team
+
+# Build system
+/build/ @quantum-nfl/devops-team
+/dist/ @quantum-nfl/devops-team
+setup.py @quantum-nfl/devops-team
