@@ -3,7 +3,7 @@ Write-Host "🎵 Starting the Quantum Symphony..." -ForegroundColor Magenta
 
 # Add all our beautiful work
 Write-Host "🎸 Adding the rhythm section..." -ForegroundColor Cyan
-git add .
+git add . 2>&1 | Out-Null
 
 # Create our first verse
 $commitMessage = @"
@@ -29,7 +29,7 @@ $commitMessage
 
 # Commit with our poetic message
 Write-Host "🎼 Recording our first track..." -ForegroundColor Green
-git commit -m $commitMessage
+git commit -m $commitMessage 2>&1 | Out-Null
 
 Write-Host @"
 

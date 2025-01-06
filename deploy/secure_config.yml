@@ -1,0 +1,82 @@
+cloudflare:
+  email: "greg@networkinggurus.com"  # Your Cloudflare email
+  api_key: ""  # Your Cloudflare API key Can we use top level please  
+  api_token: "mF89mnyjsrA35OyeVqhGeKiJjdyLmE-bfMWvlDxc"  # We'll add this later
+  zone_id: ""    # Will be fetched automatically
+  account_id: "" # Account ID Just in case this is needed
+  domain: "quantum-nfl.com"
+
+godaddy:
+  api_key: ""  # Your GoDaddy API key
+  api_secret: ""  # Your GoDaddy API secret 
+  domain: "quantum-nfl.com"
+
+ftp:
+  host: "ftp.expecting.ca"
+  username: "root"
+  password: "Zqc%TeG*WVkMvYZuIf2rGA9wMk"
+  
+deployment:
+  local_root: "d:/NFL/quantum-nfl"
+  remote_root: "/public_html"
+  
+exclude:
+  - ".git"
+  - ".github"
+  - "__pycache__"
+  - "*.pyc"
+  - "deploy/secrets"
+  - "*.log"
+  - "tests"
+  - "node_modules"
+
+security:
+  encryption_key: ""  # Will be auto-generated
+  backup_enabled: true
+  ssl_verify: true
+
+email:
+  provider: 'zoho'  # Professional email service
+  smtp:
+    host: 'smtp.zoho.com'
+    port: 587
+    use_tls: true
+  domains:
+    - 'quantum-nfl.com'
+  accounts:
+    - email: 'support@quantum-nfl.com'
+      name: 'Quantum NFL Support'
+      auto_reply: true
+    - email: 'analysis@quantum-nfl.com'
+      name: 'Quantum NFL Analysis'
+    - email: 'greg@quantum-nfl.com'
+      name: 'Greg - Quantum NFL'
+      forward_to: 'greg@networkinggurus.com'
+
+workflows:
+  support:
+    - trigger: 'new_email'
+      to: 'support@quantum-nfl.com'
+      actions:
+        - type: 'auto_categorize'
+          categories: ['question', 'feedback', 'issue']
+        - type: 'auto_reply'
+          template: 'support_acknowledgment'
+        - type: 'notify'
+          channel: 'email'
+          to: 'greg@networkinggurus.com'
+          template: 'support_notification'
+
+  analysis:
+    - trigger: 'new_analysis_request'
+      to: 'analysis@quantum-nfl.com'
+      actions:
+        - type: 'auto_reply'
+          template: 'analysis_received'
+        - type: 'create_ticket'
+          system: 'internal'
+          priority: 'high'
+        - type: 'notify'
+          channel: 'email'
+          to: 'greg@networkinggurus.com'
+          template: 'new_analysis_request'
