@@ -63,10 +63,20 @@ if ($LASTEXITCODE -ne 0) {
     gh auth login
 }
 
-gh repo create quantum-nfl --public --source=. --remote=origin --description "Where Quantum Computing Meets Football Passion! Experience NFL games through quantum-entangled sensory connections."
+# Get GitHub username
+$githubUser = gh api user --jq '.login'
+Write-Host "Publishing as $githubUser..." -ForegroundColor Cyan
+
+# Try to create repo, if it fails, just set the remote
+gh repo create "$githubUser/quantum-nfl" --public --source=. --remote=origin --description "Where Quantum Computing Meets Football Passion! Experience NFL games through quantum-entangled sensory connections." 2>&1 | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Repository exists, setting remote..." -ForegroundColor Yellow
+    git remote remove origin 2>&1 | Out-Null
+    git remote add origin "https://github.com/$githubUser/quantum-nfl.git"
+}
 
 # Push to GitHub
-git push -u origin main
+git push -u origin main --force
 
 Write-Host "✨ Quantum-NFL is now live! The waves are spreading across the universe!" -ForegroundColor Magenta
-Write-Host "🌐 Visit: https://github.com/quantum-nfl/quantum-nfl" -ForegroundColor Yellow
+Write-Host "🌐 Visit: https://github.com/$githubUser/quantum-nfl" -ForegroundColor Yellow
