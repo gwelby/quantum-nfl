@@ -1,5 +1,5 @@
 cloudflare:
-  email: "greg@networkinggurus.com"  # Your Cloudflare email
+  email: "admin@quantum-nfl.com"  # Primary admin email
   api_key: ""  # Your Cloudflare API key Can we use top level please  
   api_token: "mF89mnyjsrA35OyeVqhGeKiJjdyLmE-bfMWvlDxc"  # We'll add this later
   zone_id: ""    # Will be fetched automatically
@@ -44,19 +44,18 @@ email:
   domains:
     - 'quantum-nfl.com'
   accounts:
-    - email: 'support@quantum-nfl.com'
-      name: 'Quantum NFL Support'
-      auto_reply: true
+    - email: 'contact@quantum-nfl.com'
+      name: 'Quantum NFL Admin'
+      forward_to: 'admin@quantum-nfl.com'
     - email: 'analysis@quantum-nfl.com'
       name: 'Quantum NFL Analysis'
-    - email: 'greg@quantum-nfl.com'
-      name: 'Greg - Quantum NFL'
-      forward_to: 'greg@networkinggurus.com'
+    - email: 'admin@quantum-nfl.com'
+      name: 'Quantum NFL Admin'
 
 workflows:
   support:
     - trigger: 'new_email'
-      to: 'support@quantum-nfl.com'
+      to: 'admin@quantum-nfl.com'
       actions:
         - type: 'auto_categorize'
           categories: ['question', 'feedback', 'issue']
@@ -64,7 +63,7 @@ workflows:
           template: 'support_acknowledgment'
         - type: 'notify'
           channel: 'email'
-          to: 'greg@networkinggurus.com'
+          to: 'admin@quantum-nfl.com'
           template: 'support_notification'
 
   analysis:
@@ -78,5 +77,5 @@ workflows:
           priority: 'high'
         - type: 'notify'
           channel: 'email'
-          to: 'greg@networkinggurus.com'
+          to: 'admin@quantum-nfl.com'
           template: 'new_analysis_request'

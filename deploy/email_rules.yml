@@ -1,0 +1,58 @@
+email_rules:
+  # Primary email addresses
+  - address: admin@quantum-nfl.com
+    type: primary
+    description: "Administrative communications"
+    notifications: true
+    auto_reply: false
+
+  - address: support@quantum-nfl.com
+    type: primary
+    description: "User support and assistance"
+    notifications: true
+    auto_reply: true
+    auto_reply_template: support_acknowledgment
+
+  - address: security@quantum-nfl.com
+    type: primary
+    description: "Security reports and concerns"
+    notifications: true
+    priority: high
+    forward_to: admin@quantum-nfl.com
+
+  - address: analysis@quantum-nfl.com
+    type: primary
+    description: "Analysis requests and queries"
+    notifications: true
+    auto_reply: true
+    auto_reply_template: analysis_received
+
+  # Alias addresses
+  - address: contact@quantum-nfl.com
+    type: alias
+    forward_to: admin@quantum-nfl.com
+    description: "General contact point"
+
+  - address: info@quantum-nfl.com
+    type: alias
+    forward_to: admin@quantum-nfl.com
+    description: "Information requests"
+
+# Email templates
+templates:
+  support_acknowledgment:
+    subject: "Support Request Received - Quantum NFL"
+    template: support_acknowledgment.html
+
+  analysis_received:
+    subject: "Analysis Request Received - Quantum NFL"
+    template: analysis_received.html
+
+# Notification settings
+notifications:
+  slack_channel: "#email-notifications"
+  priority_addresses:
+    - security@quantum-nfl.com
+    - admin@quantum-nfl.com
+
+#why not an internal messaging system for Quantum-NFL with the Security System, Time, Teams and all thing Quantum

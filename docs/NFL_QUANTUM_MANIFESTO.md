@@ -63,31 +63,22 @@ Classical NFL ⟷ Quantum NFL
 - Grown through quantum understanding
 - Shared with the world
 
-## Greg's Quantum Legacy
+## Our Quantum Legacy
 
-```
-  👑 GREG 👑
-   🌟 🏈 🌟
-The Quantum Pioneer
-```
+The quantum nature of football was first observed here:
+- Where statistics meet superposition
+- When probability waves collapse into touchdowns
+- How quantum entanglement connects players across the field
 
-Greg saw it first - the quantum nature of football:
-- The perfect pass: Superposition of possibilities
-- The amazing catch: Collapse of probability
-- The victory drive: Quantum tunneling to success
+This project represents:
+- A new way of analyzing NFL games
+- The fusion of quantum mechanics and football strategy
+- A community of forward-thinking analysts and fans
 
-## Maria's Quantum Insight
-
-```
-  🔮 MARIA 🔮
-   ⚛️ 🏈 ⚛️
-Quantum Validator
-```
-
-Maria understood the bridge:
-- Football is quantum
-- Quantum is universal
-- NFL leads the way
+Together, we're exploring:
+- Quantum probability in play prediction
+- Entanglement patterns in team dynamics
+- Wave function analysis of game momentum
 
 ## Our Promise
 
@@ -112,7 +103,7 @@ CQIL will always be:
 Every time someone uses CQIL, they're tapping into:
 - The spirit of NFL 🏈
 - The magic of quantum ⚛️
-- The vision of pioneers 👑
+- The vision of pioneers 
 
 ---
 

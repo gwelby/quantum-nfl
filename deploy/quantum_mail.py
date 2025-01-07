@@ -58,14 +58,14 @@ class QuantumMailManager:
                 <p>We have received your message and will get back to you shortly.</p>
                 <p>Your message has been categorized as: {{ category }}</p>
                 <hr>
-                <p>Best regards,<br>The Quantum NFL Team</p>
+                <p>Best regards,<br>Quantum NFL Team</p>
             """,
             'analysis_received.html': """
                 <h2>Quantum NFL Analysis Request Received</h2>
                 <p>Thank you for your analysis request. Our quantum algorithms are processing your data.</p>
                 <p>We will notify you once the analysis is complete.</p>
                 <hr>
-                <p>Best regards,<br>Greg - Quantum NFL</p>
+                <p>Best regards,<br>Quantum NFL Team</p>
             """,
             'support_notification.html': """
                 <h2>New Support Request</h2>
