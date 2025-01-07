@@ -1,140 +1,215 @@
-// Quantum NFL Application
-
-// Constants
-const QUANTUM_STATES = {
-    SUPERPOSITION: 'superposition',
-    ENTANGLED: 'entangled',
-    COLLAPSED: 'collapsed'
-};
-
-// DOM Elements
-const menuButton = document.getElementById('menuButton');
-const navMenu = document.querySelector('.nav-menu');
-const predictionsGrid = document.getElementById('predictions-grid');
-
-// Theme handling
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-const updateTheme = (e) => {
-    document.body.classList.toggle('dark', e.matches);
-};
-prefersDark.addListener(updateTheme);
-updateTheme(prefersDark);
-
-// Mobile menu toggle
-menuButton?.addEventListener('click', () => {
-    navMenu?.classList.toggle('active');
+// Quantum NFL Application Core
+document.addEventListener('DOMContentLoaded', () => {
+    initializeApp();
+    setupEventListeners();
+    loadPredictions();
 });
 
-// Quantum effects
-const applyQuantumEffect = (element) => {
-    element.classList.add('quantum-animate');
-    setTimeout(() => {
-        element.classList.remove('quantum-animate');
-    }, 2000);
-};
-
-// Intersection Observer for animations
-const observeElements = () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('quantum-animate');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1
+// Initialize application
+function initializeApp() {
+    // Setup mobile menu
+    const menuButton = document.getElementById('menuButton');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    menuButton.addEventListener('click', () => {
+        navMenu.classList.toggle('hidden');
     });
 
-    document.querySelectorAll('.quantum-card').forEach(card => {
-        observer.observe(card);
-    });
-};
-
-// Live predictions
-const fetchPredictions = async () => {
-    try {
-        // Simulate quantum computation delay
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        const predictions = [
-            {
-                teams: ['GB', 'CHI'],
-                probability: 85,
-                quantum_state: QUANTUM_STATES.SUPERPOSITION
-            },
-            {
-                teams: ['SF', 'SEA'],
-                probability: 65,
-                quantum_state: QUANTUM_STATES.ENTANGLED
-            },
-            {
-                teams: ['KC', 'LV'],
-                probability: 75,
-                quantum_state: QUANTUM_STATES.COLLAPSED
-            }
-        ];
-
-        updatePredictions(predictions);
-    } catch (error) {
-        console.error('Error fetching predictions:', error);
-        predictionsGrid.innerHTML = `
-            <div class="quantum-card p-6 text-center">
-                <p class="text-red-500">Error loading predictions. Please try again later.</p>
-            </div>
-        `;
-    }
-};
-
-// Update predictions UI
-const updatePredictions = (predictions) => {
-    if (!predictionsGrid) return;
-
-    predictionsGrid.innerHTML = predictions.map(pred => `
-        <div class="quantum-card p-6 ${pred.quantum_state}">
-            <div class="flex justify-between items-center mb-4">
-                <span class="text-2xl font-bold">${pred.teams[0]}</span>
-                <span class="text-gray-600 dark:text-gray-400">vs</span>
-                <span class="text-2xl font-bold">${pred.teams[1]}</span>
-            </div>
-            <div class="text-center">
-                <div class="text-3xl font-bold mb-2">${pred.probability}%</div>
-                <p class="text-gray-600 dark:text-gray-300">Win Probability</p>
-                <div class="mt-2 text-sm text-purple-600 dark:text-purple-400">
-                    Quantum State: ${pred.quantum_state}
-                </div>
-            </div>
-        </div>
-    `).join('');
-};
-
-// Smooth scroll for navigation
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-            // Close mobile menu if open
-            navMenu?.classList.remove('active');
+    // Close menu on click outside
+    document.addEventListener('click', (e) => {
+        if (!menuButton.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.add('hidden');
         }
     });
-});
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    observeElements();
-    fetchPredictions();
-});
+    // Initialize quantum effects
+    initQuantumEffects();
+}
 
-// Export for testing
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        QUANTUM_STATES,
-        applyQuantumEffect,
-        updatePredictions
-    };
+// Setup event listeners
+function setupEventListeners() {
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Quantum card hover effects
+    document.querySelectorAll('.quantum-card').forEach(card => {
+        card.addEventListener('mousemove', handleQuantumHover);
+        card.addEventListener('mouseleave', resetQuantumEffect);
+    });
+}
+
+// Load predictions
+async function loadPredictions() {
+    const predictionsGrid = document.getElementById('predictions-grid');
+    if (!predictionsGrid) return;
+
+    // Sample predictions data (replace with actual API call)
+    const predictions = [
+        {
+            teams: ['Kansas City Chiefs', 'Buffalo Bills'],
+            probability: 0.78,
+            quantumState: 'Superposition',
+            prediction: 'High-scoring offensive battle'
+        },
+        {
+            teams: ['San Francisco 49ers', 'Philadelphia Eagles'],
+            probability: 0.65,
+            quantumState: 'Entangled',
+            prediction: 'Defensive showcase'
+        },
+        {
+            teams: ['Dallas Cowboys', 'Green Bay Packers'],
+            probability: 0.72,
+            quantumState: 'Coherent',
+            prediction: 'Close game with multiple lead changes'
+        }
+    ];
+
+    predictions.forEach(pred => {
+        const predictionCard = createPredictionCard(pred);
+        predictionsGrid.appendChild(predictionCard);
+    });
+}
+
+// Create prediction card
+function createPredictionCard(prediction) {
+    const card = document.createElement('div');
+    card.className = 'quantum-card p-6';
+    
+    card.innerHTML = `
+        <div class="mb-4">
+            <h3 class="text-xl font-bold mb-2">${prediction.teams.join(' vs ')}</h3>
+            <div class="text-sm text-gray-400">Quantum State: ${prediction.quantumState}</div>
+        </div>
+        <div class="mb-4">
+            <div class="h-2 bg-gray-700 rounded-full">
+                <div class="h-2 bg-purple-600 rounded-full" style="width: ${prediction.probability * 100}%"></div>
+            </div>
+            <div class="text-sm mt-1">Probability: ${(prediction.probability * 100).toFixed(1)}%</div>
+        </div>
+        <p class="text-gray-300">${prediction.prediction}</p>
+    `;
+
+    return card;
+}
+
+// Handle quantum hover effect
+function handleQuantumHover(e) {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const angleX = (x - centerX) / centerX * 10;
+    const angleY = (y - centerY) / centerY * 10;
+
+    card.style.transform = `perspective(1000px) rotateX(${-angleY}deg) rotateY(${angleX}deg) scale3d(1.02, 1.02, 1.02)`;
+}
+
+// Reset quantum effect
+function resetQuantumEffect(e) {
+    const card = e.currentTarget;
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+}
+
+// Initialize quantum effects
+function initQuantumEffects() {
+    // Add quantum particle effect to hero section
+    const hero = document.getElementById('hero');
+    if (hero) {
+        createQuantumParticles(hero);
+    }
+}
+
+// Create quantum particles
+function createQuantumParticles(container) {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'absolute top-0 left-0 w-full h-full -z-10';
+    container.style.position = 'relative';
+    container.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Create particles
+    for (let i = 0; i < 50; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1,
+            speedX: Math.random() * 2 - 1,
+            speedY: Math.random() * 2 - 1,
+            life: Math.random() * 0.5 + 0.5
+        });
+    }
+
+    // Animate particles
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach((particle, index) => {
+            particle.x += particle.speedX;
+            particle.y += particle.speedY;
+            particle.life -= 0.001;
+
+            // Reset particle if it's dead or out of bounds
+            if (particle.life <= 0 || 
+                particle.x < 0 || particle.x > canvas.width || 
+                particle.y < 0 || particle.y > canvas.height) {
+                particles[index] = {
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3 + 1,
+                    speedX: Math.random() * 2 - 1,
+                    speedY: Math.random() * 2 - 1,
+                    life: 1
+                };
+            }
+
+            // Draw particle
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(139, 92, 246, ${particle.life})`;
+            ctx.fill();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+    });
 }

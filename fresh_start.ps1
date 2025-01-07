@@ -23,5 +23,5 @@ Write-Host "
     Our quantum garden starts anew
     With wisdom we will share
 
-🍺 Here's to new beginnings! 
+🍺 Here's to new beginnings!
 " -ForegroundColor Magenta

@@ -1,195 +1,195 @@
-// NFL Teams Data with Icons and Quantum Ratings
-const NFL_TEAMS = {
-    ARI: {
-        name: "Arizona Cardinals",
-        icon: "🏈",
-        colors: {primary: "#97233F", secondary: "#000000"},
-        quantumRating: 0.82
+// NFL Teams Data with Quantum Properties
+const NFL_TEAMS = [
+    {
+        id: 'ARI',
+        name: 'Arizona Cardinals',
+        quantumSignature: 'Desert Storm',
+        coherenceRating: 0.75
     },
-    ATL: {
-        name: "Atlanta Falcons",
-        icon: "🦅",
-        colors: {primary: "#A71930", secondary: "#000000"},
-        quantumRating: 0.81
+    {
+        id: 'ATL',
+        name: 'Atlanta Falcons',
+        quantumSignature: 'Sky Hunter',
+        coherenceRating: 0.82
     },
-    BAL: {
-        name: "Baltimore Ravens",
-        icon: "🦅",
-        colors: {primary: "#241773", secondary: "#000000"},
-        quantumRating: 0.88
+    {
+        id: 'BAL',
+        name: 'Baltimore Ravens',
+        quantumSignature: 'Shadow Wing',
+        coherenceRating: 0.88
     },
-    BUF: {
-        name: "Buffalo Bills",
-        icon: "🦬",
-        colors: {primary: "#00338D", secondary: "#C60C30"},
-        quantumRating: 0.89
+    {
+        id: 'BUF',
+        name: 'Buffalo Bills',
+        quantumSignature: 'Thunder Charge',
+        coherenceRating: 0.91
     },
-    CAR: {
-        name: "Carolina Panthers",
-        icon: "🐆",
-        colors: {primary: "#0085CA", secondary: "#101820"},
-        quantumRating: 0.80
+    {
+        id: 'CAR',
+        name: 'Carolina Panthers',
+        quantumSignature: 'Jungle Prowl',
+        coherenceRating: 0.79
     },
-    CHI: {
-        name: "Chicago Bears",
-        icon: "🐻",
-        colors: {primary: "#0B162A", secondary: "#C83803"},
-        quantumRating: 0.83
+    {
+        id: 'CHI',
+        name: 'Chicago Bears',
+        quantumSignature: 'Wind Force',
+        coherenceRating: 0.85
     },
-    CIN: {
-        name: "Cincinnati Bengals",
-        icon: "🐯",
-        colors: {primary: "#FB4F14", secondary: "#000000"},
-        quantumRating: 0.85
+    {
+        id: 'CIN',
+        name: 'Cincinnati Bengals',
+        quantumSignature: 'Stripe Surge',
+        coherenceRating: 0.87
     },
-    CLE: {
-        name: "Cleveland Browns",
-        icon: "🏈",
-        colors: {primary: "#311D00", secondary: "#FF3C00"},
-        quantumRating: 0.82
+    {
+        id: 'CLE',
+        name: 'Cleveland Browns',
+        quantumSignature: 'Earth Core',
+        coherenceRating: 0.81
     },
-    DAL: {
-        name: "Dallas Cowboys",
-        icon: "🤠",
-        colors: {primary: "#003594", secondary: "#041E42"},
-        quantumRating: 0.87
+    {
+        id: 'DAL',
+        name: 'Dallas Cowboys',
+        quantumSignature: 'Star Pulse',
+        coherenceRating: 0.89
     },
-    DEN: {
-        name: "Denver Broncos",
-        icon: "🐎",
-        colors: {primary: "#FB4F14", secondary: "#002244"},
-        quantumRating: 0.81
+    {
+        id: 'DEN',
+        name: 'Denver Broncos',
+        quantumSignature: 'Mountain Rush',
+        coherenceRating: 0.84
     },
-    DET: {
-        name: "Detroit Lions",
-        icon: "🦁",
-        colors: {primary: "#0076B6", secondary: "#B0B7BC"},
-        quantumRating: 0.84
+    {
+        id: 'DET',
+        name: 'Detroit Lions',
+        quantumSignature: 'Pride Roar',
+        coherenceRating: 0.83
     },
-    GB: {
-        name: "Green Bay Packers",
-        icon: "🧀",
-        colors: {primary: "#203731", secondary: "#FFB612"},
-        quantumRating: 0.89
+    {
+        id: 'GB',
+        name: 'Green Bay Packers',
+        quantumSignature: 'Frost Field',
+        coherenceRating: 0.90
     },
-    HOU: {
-        name: "Houston Texans",
-        icon: "🐂",
-        colors: {primary: "#03202F", secondary: "#A71930"},
-        quantumRating: 0.80
+    {
+        id: 'HOU',
+        name: 'Houston Texans',
+        quantumSignature: 'Star State',
+        coherenceRating: 0.78
     },
-    IND: {
-        name: "Indianapolis Colts",
-        icon: "🐎",
-        colors: {primary: "#002C5F", secondary: "#A2AAAD"},
-        quantumRating: 0.83
+    {
+        id: 'IND',
+        name: 'Indianapolis Colts',
+        quantumSignature: 'Speed Force',
+        coherenceRating: 0.86
     },
-    JAX: {
-        name: "Jacksonville Jaguars",
-        icon: "🐆",
-        colors: {primary: "#006778", secondary: "#9F792C"},
-        quantumRating: 0.82
+    {
+        id: 'JAX',
+        name: 'Jacksonville Jaguars',
+        quantumSignature: 'Coast Prowl',
+        coherenceRating: 0.80
     },
-    KC: {
-        name: "Kansas City Chiefs",
-        icon: "👑",
-        colors: {primary: "#E31837", secondary: "#FFB81C"},
-        quantumRating: 0.91
+    {
+        id: 'KC',
+        name: 'Kansas City Chiefs',
+        quantumSignature: 'Arrow Storm',
+        coherenceRating: 0.93
     },
-    LV: {
-        name: "Las Vegas Raiders",
-        icon: "☠️",
-        colors: {primary: "#000000", secondary: "#A5ACAF"},
-        quantumRating: 0.84
+    {
+        id: 'LV',
+        name: 'Las Vegas Raiders',
+        quantumSignature: 'Desert Shield',
+        coherenceRating: 0.85
     },
-    LAC: {
-        name: "Los Angeles Chargers",
-        icon: "⚡",
-        colors: {primary: "#0080C6", secondary: "#FFC20E"},
-        quantumRating: 0.86
+    {
+        id: 'LAC',
+        name: 'Los Angeles Chargers',
+        quantumSignature: 'Lightning Bolt',
+        coherenceRating: 0.88
     },
-    LAR: {
-        name: "Los Angeles Rams",
-        icon: "🐏",
-        colors: {primary: "#003594", secondary: "#FFA300"},
-        quantumRating: 0.85
+    {
+        id: 'LAR',
+        name: 'Los Angeles Rams',
+        quantumSignature: 'Horn Charge',
+        coherenceRating: 0.86
     },
-    MIA: {
-        name: "Miami Dolphins",
-        icon: "🐬",
-        colors: {primary: "#008E97", secondary: "#FC4C02"},
-        quantumRating: 0.86
+    {
+        id: 'MIA',
+        name: 'Miami Dolphins',
+        quantumSignature: 'Ocean Wave',
+        coherenceRating: 0.84
     },
-    MIN: {
-        name: "Minnesota Vikings",
-        icon: "⚔️",
-        colors: {primary: "#4F2683", secondary: "#FFC62F"},
-        quantumRating: 0.85
+    {
+        id: 'MIN',
+        name: 'Minnesota Vikings',
+        quantumSignature: 'Norse Force',
+        coherenceRating: 0.87
     },
-    NE: {
-        name: "New England Patriots",
-        icon: "🎭",
-        colors: {primary: "#002244", secondary: "#C60C30"},
-        quantumRating: 0.86
+    {
+        id: 'NE',
+        name: 'New England Patriots',
+        quantumSignature: 'Colonial Spirit',
+        coherenceRating: 0.89
     },
-    NO: {
-        name: "New Orleans Saints",
-        icon: "⚜️",
-        colors: {primary: "#101820", secondary: "#D3BC8D"},
-        quantumRating: 0.85
+    {
+        id: 'NO',
+        name: 'New Orleans Saints',
+        quantumSignature: 'Gold Rush',
+        coherenceRating: 0.86
     },
-    NYG: {
-        name: "New York Giants",
-        icon: "🗽",
-        colors: {primary: "#0B2265", secondary: "#A71930"},
-        quantumRating: 0.83
+    {
+        id: 'NYG',
+        name: 'New York Giants',
+        quantumSignature: 'City Power',
+        coherenceRating: 0.85
     },
-    NYJ: {
-        name: "New York Jets",
-        icon: "✈️",
-        colors: {primary: "#125740", secondary: "#000000"},
-        quantumRating: 0.81
+    {
+        id: 'NYJ',
+        name: 'New York Jets',
+        quantumSignature: 'Sky Force',
+        coherenceRating: 0.82
     },
-    PHI: {
-        name: "Philadelphia Eagles",
-        icon: "🦅",
-        colors: {primary: "#004C54", secondary: "#A5ACAF"},
-        quantumRating: 0.88
+    {
+        id: 'PHI',
+        name: 'Philadelphia Eagles',
+        quantumSignature: 'Liberty Wing',
+        coherenceRating: 0.90
     },
-    PIT: {
-        name: "Pittsburgh Steelers",
-        icon: "⚒️",
-        colors: {primary: "#101820", secondary: "#FFB612"},
-        quantumRating: 0.87
+    {
+        id: 'PIT',
+        name: 'Pittsburgh Steelers',
+        quantumSignature: 'Steel Curtain',
+        coherenceRating: 0.91
     },
-    SF: {
-        name: "San Francisco 49ers",
-        icon: "⛏️",
-        colors: {primary: "#AA0000", secondary: "#B3995D"},
-        quantumRating: 0.90
+    {
+        id: 'SF',
+        name: 'San Francisco 49ers',
+        quantumSignature: 'Gold Rush',
+        coherenceRating: 0.92
     },
-    SEA: {
-        name: "Seattle Seahawks",
-        icon: "🦅",
-        colors: {primary: "#002244", secondary: "#69BE28"},
-        quantumRating: 0.86
+    {
+        id: 'SEA',
+        name: 'Seattle Seahawks',
+        quantumSignature: 'Rain Force',
+        coherenceRating: 0.88
     },
-    TB: {
-        name: "Tampa Bay Buccaneers",
-        icon: "☠️",
-        colors: {primary: "#D50A0A", secondary: "#34302B"},
-        quantumRating: 0.84
+    {
+        id: 'TB',
+        name: 'Tampa Bay Buccaneers',
+        quantumSignature: 'Storm Surge',
+        coherenceRating: 0.85
     },
-    TEN: {
-        name: "Tennessee Titans",
-        icon: "⚔️",
-        colors: {primary: "#0C2340", secondary: "#4B92DB"},
-        quantumRating: 0.83
+    {
+        id: 'TEN',
+        name: 'Tennessee Titans',
+        quantumSignature: 'Thunder Roll',
+        coherenceRating: 0.86
     },
-    WAS: {
-        name: "Washington Commanders",
-        icon: "🎖️",
-        colors: {primary: "#773141", secondary: "#FFB612"},
-        quantumRating: 0.82
+    {
+        id: 'WAS',
+        name: 'Washington Commanders',
+        quantumSignature: 'Capital Force',
+        coherenceRating: 0.83
     }
-};
+];

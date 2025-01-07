@@ -460,3 +460,250 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000); // Simulate a play every 2 seconds
     });
 });
+
+// Quantum NFL Simulator
+class QuantumSimulator {
+    constructor() {
+        this.teams = {};
+        this.quantumStates = new Map();
+        this.entanglementPatterns = new Map();
+        this.initializeSimulator();
+    }
+
+    initializeSimulator() {
+        // Initialize quantum states for all teams
+        NFL_TEAMS.forEach(team => {
+            this.teams[team.id] = {
+                name: team.name,
+                stats: this.generateQuantumStats(),
+                history: []
+            };
+            this.quantumStates.set(team.id, this.createQuantumState());
+        });
+
+        // Setup event listeners
+        document.getElementById('simulateButton').addEventListener('click', () => this.runSimulation());
+        this.populateTeamSelects();
+    }
+
+    generateQuantumStats() {
+        return {
+            offense: Math.random() * 100,
+            defense: Math.random() * 100,
+            specialTeams: Math.random() * 100,
+            momentum: Math.random() * 100,
+            quantumPotential: Math.random()
+        };
+    }
+
+    createQuantumState() {
+        return {
+            superposition: Math.random(),
+            entanglement: Math.random(),
+            coherence: Math.random()
+        };
+    }
+
+    populateTeamSelects() {
+        const homeSelect = document.getElementById('homeTeam');
+        const awaySelect = document.getElementById('awayTeam');
+
+        NFL_TEAMS.forEach(team => {
+            const option = document.createElement('option');
+            option.value = team.id;
+            option.textContent = team.name;
+            homeSelect.appendChild(option.cloneNode(true));
+            awaySelect.appendChild(option);
+        });
+    }
+
+    calculateQuantumProbability(teamA, teamB) {
+        const stateA = this.quantumStates.get(teamA);
+        const stateB = this.quantumStates.get(teamB);
+        
+        return (stateA.superposition * stateB.coherence + 
+                stateA.entanglement * stateB.superposition) / 2;
+    }
+
+    simulateQuantumPlay(offense, defense) {
+        const quantumInterference = Math.random() * Math.PI;
+        const waveFunctionCollapse = Math.sin(quantumInterference) ** 2;
+        
+        return (offense.stats.offense * waveFunctionCollapse - 
+                defense.stats.defense * (1 - waveFunctionCollapse));
+    }
+
+    async runSimulation() {
+        const homeTeamId = document.getElementById('homeTeam').value;
+        const awayTeamId = document.getElementById('awayTeam').value;
+        
+        const homeTeam = this.teams[homeTeamId];
+        const awayTeam = this.teams[awayTeamId];
+
+        const results = document.getElementById('simulationResults');
+        results.innerHTML = '<div class="quantum-loader"></div>';
+        results.classList.remove('hidden');
+
+        // Simulate quantum entanglement
+        await this.simulateEntanglement(homeTeam, awayTeam);
+
+        // Calculate probabilities
+        const homeProb = this.calculateQuantumProbability(homeTeamId, awayTeamId);
+        const awayProb = 1 - homeProb;
+
+        // Simulate multiple universe outcomes
+        const universes = this.simulateMultiverseOutcomes(homeTeam, awayTeam);
+
+        // Display results
+        this.displayResults(homeTeam, awayTeam, universes, homeProb, awayProb);
+        this.updateCharts(homeTeam, awayTeam, universes);
+    }
+
+    async simulateEntanglement(teamA, teamB) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                const entanglementStrength = Math.random();
+                this.entanglementPatterns.set(`${teamA.name}-${teamB.name}`, entanglementStrength);
+                resolve();
+            }, 1000);
+        });
+    }
+
+    simulateMultiverseOutcomes(teamA, teamB) {
+        const universes = [];
+        const numUniverses = 1000;
+
+        for (let i = 0; i < numUniverses; i++) {
+            const scoreA = this.simulateQuantumPlay(teamA, teamB);
+            const scoreB = this.simulateQuantumPlay(teamB, teamA);
+            
+            universes.push({
+                universe: i,
+                scoreA: Math.max(0, Math.round(scoreA / 10)),
+                scoreB: Math.max(0, Math.round(scoreB / 10))
+            });
+        }
+
+        return universes;
+    }
+
+    displayResults(homeTeam, awayTeam, universes, homeProb, awayProb) {
+        const results = document.getElementById('simulationResults');
+        
+        // Calculate average scores
+        const avgScores = universes.reduce((acc, universe) => {
+            acc.homeScore += universe.scoreA;
+            acc.awayScore += universe.scoreB;
+            return acc;
+        }, { homeScore: 0, awayScore: 0 });
+
+        avgScores.homeScore = Math.round(avgScores.homeScore / universes.length);
+        avgScores.awayScore = Math.round(avgScores.awayScore / universes.length);
+
+        // Find most probable outcome
+        const mostProbable = this.findMostProbableOutcome(universes);
+
+        results.innerHTML = `
+            <div class="space-y-6">
+                <h3 class="text-2xl font-bold mb-4">Quantum Simulation Results</h3>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <div class="text-lg font-bold">${homeTeam.name}</div>
+                        <div class="text-3xl font-bold quantum-text">${avgScores.homeScore}</div>
+                        <div class="text-sm">Win Probability: ${(homeProb * 100).toFixed(1)}%</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-lg font-bold">${awayTeam.name}</div>
+                        <div class="text-3xl font-bold quantum-text">${avgScores.awayScore}</div>
+                        <div class="text-sm">Win Probability: ${(awayProb * 100).toFixed(1)}%</div>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <h4 class="text-lg font-bold mb-2">Most Probable Outcome</h4>
+                    <div class="quantum-card p-4">
+                        <div class="text-center">
+                            ${homeTeam.name} ${mostProbable.scoreA} - ${mostProbable.scoreB} ${awayTeam.name}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <h4 class="text-lg font-bold mb-2">Quantum Analysis</h4>
+                    <div class="quantum-card p-4">
+                        <ul class="space-y-2">
+                            <li>Entanglement Strength: ${(this.entanglementPatterns.get(`${homeTeam.name}-${awayTeam.name}`) * 100).toFixed(1)}%</li>
+                            <li>Quantum Coherence: ${((homeTeam.stats.quantumPotential + awayTeam.stats.quantumPotential) / 2 * 100).toFixed(1)}%</li>
+                            <li>Universe Variants: ${universes.length}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    findMostProbableOutcome(universes) {
+        const outcomes = {};
+        
+        universes.forEach(universe => {
+            const key = `${universe.scoreA}-${universe.scoreB}`;
+            outcomes[key] = (outcomes[key] || 0) + 1;
+        });
+
+        const mostProbableKey = Object.entries(outcomes)
+            .sort(([,a], [,b]) => b - a)[0][0];
+        
+        const [scoreA, scoreB] = mostProbableKey.split('-').map(Number);
+        return { scoreA, scoreB };
+    }
+
+    updateCharts(homeTeam, awayTeam, universes) {
+        // Update superposition chart
+        this.updateSuperpositionChart(universes);
+        
+        // Update entanglement chart
+        this.updateEntanglementChart(homeTeam, awayTeam);
+        
+        // Update wave function chart
+        this.updateWaveFunctionChart(universes);
+    }
+
+    updateSuperpositionChart(universes) {
+        const canvas = document.getElementById('superpositionChart');
+        const ctx = canvas.getContext('2d');
+        
+        // Clear previous chart
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Implementation of superposition visualization
+        // (Add your preferred charting library implementation here)
+    }
+
+    updateEntanglementChart(teamA, teamB) {
+        const canvas = document.getElementById('entanglementChart');
+        const ctx = canvas.getContext('2d');
+        
+        // Clear previous chart
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Implementation of entanglement visualization
+        // (Add your preferred charting library implementation here)
+    }
+
+    updateWaveFunctionChart(universes) {
+        const canvas = document.getElementById('waveFunctionChart');
+        const ctx = canvas.getContext('2d');
+        
+        // Clear previous chart
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Implementation of wave function visualization
+        // (Add your preferred charting library implementation here)
+    }
+}
+
+// Initialize the simulator when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    window.quantumSimulator = new QuantumSimulator();
+});

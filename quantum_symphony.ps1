@@ -33,7 +33,7 @@ git commit -m $commitMessage 2>&1 | Out-Null
 
 Write-Host @"
 
-🍺 First movement complete! 
+🍺 First movement complete!
 Time for a celebratory sip...
 
 Remember:

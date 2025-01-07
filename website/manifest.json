@@ -1,51 +1,101 @@
 {
-    "name": "NFL Quantum Teams",
-    "short_name": "NFL Quantum",
-    "description": "Quantum-powered NFL analytics and predictions",
+    "name": "Quantum NFL",
+    "short_name": "QNFL",
+    "description": "Experience NFL predictions through quantum mechanics",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#047857",
-    "theme_color": "#047857",
+    "background_color": "#1f2937",
+    "theme_color": "#6d28d9",
+    "orientation": "portrait-primary",
     "icons": [
         {
-            "src": "icons/icon-72x72.png",
+            "src": "/icons/icon-72x72.png",
             "sizes": "72x72",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
-            "src": "icons/icon-96x96.png",
+            "src": "/icons/icon-96x96.png",
             "sizes": "96x96",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
-            "src": "icons/icon-128x128.png",
+            "src": "/icons/icon-128x128.png",
             "sizes": "128x128",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
-            "src": "icons/icon-144x144.png",
+            "src": "/icons/icon-144x144.png",
             "sizes": "144x144",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
-            "src": "icons/icon-152x152.png",
+            "src": "/icons/icon-152x152.png",
             "sizes": "152x152",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
-            "src": "icons/icon-192x192.png",
+            "src": "/icons/icon-192x192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
-            "src": "icons/icon-384x384.png",
+            "src": "/icons/icon-384x384.png",
             "sizes": "384x384",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
-            "src": "icons/icon-512x512.png",
+            "src": "/icons/icon-512x512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "View Predictions",
+            "short_name": "Predictions",
+            "description": "View latest quantum predictions",
+            "url": "/#predictions",
+            "icons": [{ "src": "/icons/predictions.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Run Simulator",
+            "short_name": "Simulator",
+            "description": "Try the quantum simulator",
+            "url": "/#simulator",
+            "icons": [{ "src": "/icons/simulator.png", "sizes": "192x192" }]
+        }
+    ],
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "screenshots": [
+        {
+            "src": "/screenshots/home.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "platform": "wide",
+            "label": "Homescreen of Quantum NFL"
+        },
+        {
+            "src": "/screenshots/predictions.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "platform": "wide",
+            "label": "Quantum predictions page"
+        },
+        {
+            "src": "/screenshots/simulator.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "platform": "wide",
+            "label": "Quantum simulator in action"
         }
     ]
 }

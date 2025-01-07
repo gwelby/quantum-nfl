@@ -1,88 +1,138 @@
-// NFL Quantum Teams Service Worker
-
-const CACHE_NAME = 'nfl-quantum-v1';
-const ASSETS_TO_CACHE = [
+// Quantum NFL Service Worker
+const CACHE_NAME = 'quantum-nfl-v1';
+const ASSETS = [
     '/',
     '/index.html',
     '/styles.css',
     '/app.js',
-    '/manifest.json',
-    'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
+    '/teams.js',
+    '/simulator.js',
+    '/manifest.json'
 ];
 
-// Install service worker and cache assets
-self.addEventListener('install', (event) => {
+// Install event
+self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
-            .then((cache) => {
-                return cache.addAll(ASSETS_TO_CACHE);
-            })
+            .then(cache => cache.addAll(ASSETS))
+            .then(() => self.skipWaiting())
     );
 });
 
-// Activate service worker and clean up old caches
-self.addEventListener('activate', (event) => {
+// Activate event
+self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys().then((cacheNames) => {
+        caches.keys().then(cacheNames => {
             return Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (cacheName !== CACHE_NAME) {
-                        return caches.delete(cacheName);
-                    }
-                })
+                cacheNames
+                    .filter(name => name !== CACHE_NAME)
+                    .map(name => caches.delete(name))
             );
         })
     );
 });
 
-// Fetch assets from cache or network
-self.addEventListener('fetch', (event) => {
+// Fetch event
+self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
-            .then((response) => {
-                // Return cached version or fetch from network
-                return response || fetch(event.request)
-                    .then((response) => {
-                        // Cache new resources
-                        if (response.status === 200) {
-                            const responseClone = response.clone();
-                            caches.open(CACHE_NAME)
-                                .then((cache) => {
-                                    cache.put(event.request, responseClone);
-                                });
-                        }
+            .then(response => {
+                if (response) {
+                    return response;
+                }
+                return fetch(event.request).then(response => {
+                    // Check if we received a valid response
+                    if (!response || response.status !== 200 || response.type !== 'basic') {
                         return response;
-                    });
+                    }
+
+                    // Clone the response
+                    const responseToCache = response.clone();
+
+                    caches.open(CACHE_NAME)
+                        .then(cache => {
+                            cache.put(event.request, responseToCache);
+                        });
+
+                    return response;
+                });
             })
     );
 });
 
-// Handle push notifications
-self.addEventListener('push', (event) => {
+// Background sync
+self.addEventListener('sync', event => {
+    if (event.tag === 'quantum-sync') {
+        event.waitUntil(
+            // Sync quantum data
+            syncQuantumData()
+        );
+    }
+});
+
+// Push notification
+self.addEventListener('push', event => {
     const options = {
         body: event.data.text(),
-        icon: 'icons/icon-192x192.png',
-        badge: 'icons/badge-72x72.png',
+        icon: '/icons/icon-512x512.png',
+        badge: '/icons/badge-96x96.png',
         vibrate: [100, 50, 100],
         data: {
             dateOfArrival: Date.now(),
-            primaryKey: '1'
+            primaryKey: 1
         },
         actions: [
             {
                 action: 'explore',
-                title: 'View Predictions',
-                icon: 'icons/checkmark.png'
+                title: 'View Prediction',
+                icon: '/icons/checkmark.png'
             },
             {
                 action: 'close',
                 title: 'Close',
-                icon: 'icons/xmark.png'
+                icon: '/icons/xmark.png'
             }
         ]
     };
 
     event.waitUntil(
-        self.registration.showNotification('NFL Quantum Teams', options)
+        self.registration.showNotification('Quantum NFL Update', options)
     );
 });
+
+// Notification click
+self.addEventListener('notificationclick', event => {
+    event.notification.close();
+
+    if (event.action === 'explore') {
+        event.waitUntil(
+            clients.openWindow('/')
+        );
+    }
+});
+
+// Helper function to sync quantum data
+async function syncQuantumData() {
+    try {
+        const response = await fetch('/api/quantum-sync');
+        if (!response.ok) {
+            throw new Error('Quantum sync failed');
+        }
+        const data = await response.json();
+        
+        // Process quantum data
+        await processQuantumData(data);
+        
+        return true;
+    } catch (error) {
+        console.error('Quantum sync error:', error);
+        return false;
+    }
+}
+
+// Helper function to process quantum data
+async function processQuantumData(data) {
+    // Process and store quantum data
+    const cache = await caches.open(CACHE_NAME);
+    await cache.put('/api/quantum-data', new Response(JSON.stringify(data)));
+}

@@ -31,8 +31,8 @@ Write-Host @"
 
 Next steps:
 1. Run: .\quantum_symphony.ps1
-2. Enjoy another beer! 
+2. Enjoy another beer!
 
 Remember: Sometimes you need to clean the glass
-         before pouring the perfect beer! 
+         before pouring the perfect beer!
 "@ -ForegroundColor Magenta
