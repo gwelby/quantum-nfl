@@ -1,9 +1,134 @@
 // Quantum NFL Application Core
 document.addEventListener('DOMContentLoaded', () => {
-    initializeApp();
-    setupEventListeners();
-    loadPredictions();
+    window.nflQuantum = new NFLQuantumApp();
 });
+
+// NFL Quantum Experience Main Application
+
+class NFLQuantumApp {
+    constructor() {
+        this.components = {};
+        this.initialized = false;
+        this.initializeApp();
+    }
+
+    async initializeApp() {
+        try {
+            // Initialize core components
+            this.components.clock = new NFLQuantumClock('quantum-clock');
+            this.components.teams = new QuantumTeamsViz();
+            this.components.celebrations = new QuantumCelebrations();
+            this.components.mobile = new MobileQuantumManager();
+
+            // Initialize quantum demos
+            await this.initializeQuantumDemos();
+
+            // Setup event listeners
+            this.setupEventListeners();
+
+            // Mark as initialized
+            this.initialized = true;
+            console.log('NFL Quantum Experience initialized successfully');
+        } catch (error) {
+            console.error('Error initializing NFL Quantum Experience:', error);
+        }
+    }
+
+    async initializeQuantumDemos() {
+        const demoContainer = document.getElementById('quantum-demos');
+        if (demoContainer) {
+            // Initialize demo components
+            this.components.field = new EnhancedQuantumField();
+            this.components.analyzer = new EnhancedPlayerAnalyzer();
+            
+            // Start animations
+            requestAnimationFrame(() => this.updateDemos());
+        }
+    }
+
+    setupEventListeners() {
+        // Handle window resize
+        window.addEventListener('resize', () => this.handleResize());
+
+        // Handle visibility changes
+        document.addEventListener('visibilitychange', () => this.handleVisibility());
+
+        // Handle mobile events
+        if ('ontouchstart' in window) {
+            this.setupMobileEvents();
+        }
+    }
+
+    setupMobileEvents() {
+        document.addEventListener('touchstart', (e) => this.handleTouch(e), { passive: true });
+        window.addEventListener('deviceorientation', (e) => this.handleOrientation(e), true);
+        window.addEventListener('devicemotion', (e) => this.handleMotion(e), true);
+    }
+
+    handleResize() {
+        // Update all components
+        Object.values(this.components).forEach(component => {
+            if (component.resize) {
+                component.resize();
+            }
+        });
+    }
+
+    handleVisibility() {
+        if (document.hidden) {
+            this.pauseAnimations();
+        } else {
+            this.resumeAnimations();
+        }
+    }
+
+    handleTouch(event) {
+        if (this.components.mobile) {
+            this.components.mobile.handleTouch(event);
+        }
+    }
+
+    handleOrientation(event) {
+        if (this.components.mobile) {
+            this.components.mobile.handleOrientation(event);
+        }
+    }
+
+    handleMotion(event) {
+        if (this.components.mobile) {
+            this.components.mobile.handleMotion(event);
+        }
+    }
+
+    pauseAnimations() {
+        Object.values(this.components).forEach(component => {
+            if (component.pause) {
+                component.pause();
+            }
+        });
+    }
+
+    resumeAnimations() {
+        Object.values(this.components).forEach(component => {
+            if (component.resume) {
+                component.resume();
+            }
+        });
+    }
+
+    updateDemos() {
+        if (!this.initialized || document.hidden) return;
+
+        // Update all animated components
+        Object.values(this.components).forEach(component => {
+            if (component.update) {
+                component.update();
+            }
+        });
+
+        requestAnimationFrame(() => this.updateDemos());
+    }
+}
 
 // Initialize application
 function initializeApp() {
@@ -200,6 +325,97 @@ function createQuantumParticles(container) {
 
     animate();
 }
+
+// Quantum NFL Interactive Features
+
+// Scroll Animation
+const observeElements = () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+};
+
+// Quantum Particles
+const createParticles = () => {
+    const container = document.createElement('div');
+    container.className = 'quantum-particles';
+    document.body.appendChild(container);
+
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 8}s`;
+        container.appendChild(particle);
+    }
+};
+
+// Interactive Cards
+const initializeCards = () => {
+    document.querySelectorAll('.hover-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+};
+
+// Navigation Highlight
+const highlightNavigation = () => {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.pageYOffset >= sectionTop - 60) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').slice(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+};
+
+// Smooth Scrolling
+const initSmoothScroll = () => {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+};
+
+// Check for reduced motion preference
+const checkReducedMotion = () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.body.classList.add('reduce-motion');
+    }
+};
 
 // Service Worker Registration
 if ('serviceWorker' in navigator) {

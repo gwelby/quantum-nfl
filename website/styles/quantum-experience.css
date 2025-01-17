@@ -1,0 +1,293 @@
+/* Quantum Experience Core Styles */
+
+:root {
+    --quantum-purple: #9333EA;
+    --quantum-indigo: #4F46E5;
+    --quantum-dark: #1E1B4B;
+}
+
+body {
+    background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Quantum Clock Container */
+.quantum-clock-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.2);
+    transition: all 0.3s ease;
+}
+
+.quantum-clock-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
+}
+
+#quantum-clock {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at center,
+        rgba(15, 23, 42, 0.8) 0%,
+        rgba(15, 23, 42, 0.6) 50%,
+        rgba(15, 23, 42, 0.4) 100%
+    );
+}
+
+/* Text Effects */
+.quantum-text-glow {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
+    animation: quantumPulse 2s ease-in-out infinite;
+}
+
+@keyframes quantumPulse {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(147, 51, 234, 0.8);
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    padding: 8rem 0;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(147, 51, 234, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-indigo));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .quantum-clock-container {
+        padding: 1rem;
+    }
+    
+    #quantum-clock {
+        max-width: 300px;
+    }
+    
+    .hero-section {
+        padding: 4rem 0;
+    }
+}
+
+/* High-performance mode */
+@media (min-width: 1200px) {
+    .quantum-clock-container {
+        will-change: transform;
+    }
+    
+    #quantum-clock {
+        will-change: transform;
+    }
+}
+
+/* Quantum Cards */
+.quantum-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(147, 51, 234, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.quantum-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(147, 51, 234, 0.2);
+}
+
+/* Entertainment Hub */
+.entertainment-hub {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Music Visualizer */
+#music-visualizer {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+/* Stadium Energy */
+.energy-waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(147, 51, 234, 0.1) 0%,
+        rgba(147, 51, 234, 0.2) 50%,
+        rgba(147, 51, 234, 0.1) 100%
+    );
+    animation: waveFlow 10s linear infinite;
+}
+
+.crowd-meter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(
+        to top,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform-origin: bottom;
+    animation: crowdPulse 2s ease-in-out infinite;
+}
+
+/* Team Consciousness */
+#consciousness-meter {
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.consciousness-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(147, 51, 234, 0.1),
+        rgba(147, 51, 234, 0.2) 10px,
+        rgba(147, 51, 234, 0.1) 20px
+    );
+    animation: consciousnessFlow 10s linear infinite;
+}
+
+/* Game Situations */
+.situation-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.situation-card:hover {
+    background: rgba(147, 51, 234, 0.3);
+    transform: scale(1.05);
+}
+
+.situation-card i {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes waveFlow {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes crowdPulse {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.2); }
+}
+
+@keyframes consciousnessFlow {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Quantum Buttons */
+.quantum-btn {
+    background: linear-gradient(
+        45deg,
+        rgba(147, 51, 234, 0.5),
+        rgba(147, 51, 234, 0.3)
+    );
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quantum-btn:hover {
+    background: linear-gradient(
+        45deg,
+        rgba(147, 51, 234, 0.7),
+        rgba(147, 51, 234, 0.5)
+    );
+    transform: translateY(-2px);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .entertainment-hub {
+        grid-template-columns: 1fr;
+    }
+
+    .quantum-card {
+        margin-bottom: 1rem;
+    }
+
+    .game-situations .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Quantum Effects */
+.quantum-glow {
+    animation: quantumPulse 2s ease-in-out infinite;
+}
+
+@keyframes quantumPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(147, 51, 234, 0.5);
+    }
+}

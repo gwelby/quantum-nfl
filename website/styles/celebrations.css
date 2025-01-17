@@ -1,0 +1,127 @@
+/* NFL Quantum Celebrations Styles */
+
+.celebration-container {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.celebration-particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Celebration Types */
+.touchdown-celebration {
+    animation: touchdown-glow 2s ease-in-out infinite;
+}
+
+.fieldgoal-celebration {
+    animation: fieldgoal-arc 1.5s ease-out forwards;
+}
+
+.interception-celebration {
+    animation: interception-flash 1s ease-out forwards;
+}
+
+.sack-celebration {
+    animation: sack-impact 0.8s ease-out forwards;
+}
+
+/* Animation Keyframes */
+@keyframes touchdown-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+    }
+}
+
+@keyframes fieldgoal-arc {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-100px) scale(1.5);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes interception-flash {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+@keyframes sack-impact {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+/* Team-specific celebration colors */
+.cowboys-celebration .celebration-particle {
+    background: linear-gradient(45deg, #003594, #041E42);
+}
+
+.packers-celebration .celebration-particle {
+    background: linear-gradient(45deg, #203731, #FFB612);
+}
+
+/* Quantum effects */
+.quantum-particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(147,51,234,0.4) 100%);
+    mix-blend-mode: screen;
+    filter: blur(2px);
+}
+
+.quantum-trail {
+    position: absolute;
+    background: linear-gradient(90deg, rgba(147,51,234,0), rgba(147,51,234,0.4), rgba(147,51,234,0));
+    transform-origin: center;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .celebration-container {
+        transform: scale(0.7);
+    }
+    
+    .quantum-particle {
+        filter: blur(1px);
+    }
+}
+
+/* High-performance mode */
+@media (min-width: 1200px) {
+    .celebration-container {
+        will-change: transform;
+    }
+    
+    .celebration-particle {
+        will-change: transform, opacity;
+    }
+}

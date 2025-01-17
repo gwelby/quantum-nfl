@@ -1,0 +1,207 @@
+/* Quantum Football Demo Styles */
+
+/* Field Container */
+.quantum-field-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: #2E7D32;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#fieldCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+.quantum-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.player-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(109, 40, 217, 0.5);
+    transform: translate(-50%, -50%);
+}
+
+.quantum-paths {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Quantum Clock */
+.quantum-clock-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+#clockCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+.quantum-time-display {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'NFL', monospace;
+    font-size: 24px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(109, 40, 217, 0.5);
+}
+
+/* Quantum State Analyzer */
+.quantum-sphere-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#sphereCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+.bio-stat {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.bio-stat i {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 0.5rem;
+}
+
+.quantum-wave {
+    position: relative;
+    height: 100px;
+    background: linear-gradient(90deg, 
+        rgba(109, 40, 217, 0.2),
+        rgba(147, 51, 234, 0.2)
+    );
+}
+
+.quantum-wave::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 50px,
+        rgba(255, 255, 255, 0.1) 50px,
+        rgba(255, 255, 255, 0.1) 100px
+    );
+    animation: wave-animation 10s linear infinite;
+}
+
+@keyframes wave-animation {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* NFL Theme Elements */
+.nfl-border {
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 20px rgba(109, 40, 217, 0.3);
+}
+
+.field-markings {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.1) 1px,
+        transparent 1px,
+        transparent 10%
+    );
+}
+
+/* Interactive Elements */
+.demo-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.demo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Camera Feed */
+.camera-feed {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#userCamera {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#startTracking {
+    background: linear-gradient(135deg, #6d28d9, #9333ea);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#startTracking:hover {
+    transform: translateY(-2px);
+}
+
+#predictionOutput {
+    font-family: 'NFL', monospace;
+    letter-spacing: 1px;
+}

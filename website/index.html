@@ -1,174 +1,103 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum NFL Analysis</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="manifest" href="manifest.json">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>NFL Quantum Experience - Where Football Meets Quantum Mechanics</title>
+    <meta name="description" content="Experience NFL games through quantum mechanics. Real-time quantum predictions and game state analysis.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/quantum-experience.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 text-white min-h-screen">
-    <nav class="fixed top-0 w-full bg-black/30 backdrop-blur-md z-50">
-        <div class="container mx-auto px-6 py-3">
-            <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold quantum-text">Quantum NFL</div>
-                <button id="menuButton" class="md:hidden quantum-button">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-                    </svg>
-                </button>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-900 bg-opacity-90 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-2xl font-bold text-purple-500">NFL Quantum</span>
+                </div>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#predictions" class="quantum-link">Predictions</a>
-                    <a href="#simulator" class="quantum-link">Simulator</a>
-                    <a href="#analysis" class="quantum-link">Analysis</a>
-                    <a href="#about" class="quantum-link">About</a>
+                    <a href="#game-day" class="text-gray-300 hover:text-purple-500">Game Day</a>
+                    <a href="#predictions" class="text-gray-300 hover:text-purple-500">Predictions</a>
+                    <a href="#teams" class="text-gray-300 hover:text-purple-500">Teams</a>
+                    <a href="#about" class="text-gray-300 hover:text-purple-500">About</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="nav-menu hidden fixed right-0 top-16 bg-black/30 backdrop-blur-md p-4 rounded-l-lg transform transition-transform duration-300 ease-in-out">
-        <div class="flex flex-col space-y-4">
-            <a href="#predictions" class="quantum-link">Predictions</a>
-            <a href="#simulator" class="quantum-link">Simulator</a>
-            <a href="#analysis" class="quantum-link">Analysis</a>
-            <a href="#about" class="quantum-link">About</a>
-        </div>
-    </div>
-
-    <main class="container mx-auto px-6 pt-24">
-        <section id="hero" class="min-h-screen flex items-center justify-center text-center">
-            <div class="quantum-card p-8 max-w-3xl">
-                <h1 class="text-5xl font-bold mb-6 quantum-text">Welcome to Quantum NFL</h1>
-                <p class="text-xl mb-8">Experience football analysis through the lens of quantum mechanics</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <a href="#predictions" class="quantum-button">View Predictions</a>
-                    <a href="#simulator" class="quantum-button">Try Simulator</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="predictions" class="min-h-screen py-20">
-            <h2 class="text-4xl font-bold mb-12 text-center quantum-text">Quantum Predictions</h2>
-            <div id="predictions-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Predictions will be loaded here -->
-            </div>
-        </section>
-
-        <section id="simulator" class="min-h-screen py-20">
-            <h2 class="text-4xl font-bold mb-12 text-center quantum-text">Quantum Simulator</h2>
-            <div class="quantum-card p-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4">Team Selection</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block mb-2">Home Team</label>
-                                <select id="homeTeam" class="quantum-select"></select>
-                            </div>
-                            <div>
-                                <label class="block mb-2">Away Team</label>
-                                <select id="awayTeam" class="quantum-select"></select>
-                            </div>
-                        </div>
-                        <button id="simulateButton" class="quantum-button mt-6">Run Simulation</button>
-                    </div>
-                    <div id="simulationResults" class="quantum-results hidden">
-                        <!-- Simulation results will appear here -->
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                NFL Quantum Experience
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-300">
+                Where Football Meets Quantum Mechanics
+            </p>
+            
+            <!-- Game State Display -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div class="quantum-card">
+                    <h3 class="text-xl font-bold mb-4">Quantum Clock</h3>
+                    <div class="quantum-clock-container">
+                        <canvas id="quantum-clock" class="mx-auto" width="600" height="600"></canvas>
+                        <div id="game-status" class="text-xl mt-4 quantum-text-glow"></div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="analysis" class="min-h-screen py-20">
-            <h2 class="text-4xl font-bold mb-12 text-center quantum-text">Quantum Analysis</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="quantum-card p-6">
-                    <h3 class="text-2xl font-bold mb-4">Superposition States</h3>
-                    <p>Analyzing multiple game outcomes simultaneously</p>
-                    <div id="superpositionChart" class="h-48 mt-4"></div>
-                </div>
-                <div class="quantum-card p-6">
-                    <h3 class="text-2xl font-bold mb-4">Entanglement Patterns</h3>
-                    <p>Team correlation and performance links</p>
-                    <div id="entanglementChart" class="h-48 mt-4"></div>
-                </div>
-                <div class="quantum-card p-6">
-                    <h3 class="text-2xl font-bold mb-4">Wave Function</h3>
-                    <p>Probability distributions of game scenarios</p>
-                    <div id="waveFunctionChart" class="h-48 mt-4"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="min-h-screen py-20">
-            <h2 class="text-4xl font-bold mb-12 text-center quantum-text">About Quantum NFL</h2>
-            <div class="quantum-card p-8">
-                <div class="prose prose-invert max-w-none">
-                    <p class="mb-6">Quantum NFL represents a breakthrough in sports analysis, combining quantum computing principles with football statistics to provide unprecedented insights into game dynamics and outcomes.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4">Our Approach</h3>
-                            <ul class="list-disc pl-6 space-y-2">
-                                <li>Quantum probability analysis</li>
-                                <li>Entanglement-based team dynamics</li>
-                                <li>Superposition state modeling</li>
-                                <li>Wave function collapse predictions</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4">Benefits</h3>
-                            <ul class="list-disc pl-6 space-y-2">
-                                <li>More accurate predictions</li>
-                                <li>Deep pattern recognition</li>
-                                <li>Complex scenario analysis</li>
-                                <li>Real-time adjustments</li>
-                            </ul>
-                        </div>
+                
+                <div class="quantum-card">
+                    <h3 class="text-xl font-bold mb-4">Team States</h3>
+                    <div id="quantum-teams" class="quantum-viz-container" style="height: 400px;">
+                        <!-- Team quantum states will be rendered here -->
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-black/30 backdrop-blur-md py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Contact</h3>
-                    <p>Email: contact@quantum-nfl.com</p>
-                    <p>Support: support@quantum-nfl.com</p>
+                
+                <div class="quantum-card">
+                    <h3 class="text-xl font-bold mb-4">Predictions</h3>
+                    <div id="quantum-predictions" class="quantum-viz-container">
+                        <!-- Real-time predictions will be shown here -->
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#predictions" class="hover:text-purple-400">Predictions</a></li>
-                        <li><a href="#simulator" class="hover:text-purple-400">Simulator</a></li>
-                        <li><a href="#analysis" class="hover:text-purple-400">Analysis</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Legal</h3>
-                    <ul class="space-y-2">
-                        <li><a href="/privacy" class="hover:text-purple-400">Privacy Policy</a></li>
-                        <li><a href="/terms" class="hover:text-purple-400">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
-                <p>&copy; 2025 Quantum NFL. All rights reserved.</p>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <script src="app.js"></script>
-    <script src="teams.js"></script>
-    <script src="simulator.js"></script>
+    <!-- Debug Console -->
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-        }
+        console.log('Debug mode enabled');
+        window.addEventListener('error', function(e) {
+            console.error('Global error:', e.message, 'at', e.filename, ':', e.lineno);
+        });
+    </script>
+    
+    <!-- NFL Quantum Scripts -->
+    <script type="module">
+        console.log('Starting NFL Quantum Experience...');
+        
+        import { NFLQuantumClock } from './js/nfl-quantum-clock.js';
+        import { QuantumTeamsViz } from './js/quantum-teams.js';
+        import { MobileQuantumManager } from './js/mobile-quantum.js';
+        
+        // Initialize components when DOM is loaded
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, initializing components...');
+            
+            try {
+                window.nflQuantum = {
+                    clock: new NFLQuantumClock('quantum-clock'),
+                    teams: new QuantumTeamsViz('quantum-teams'),
+                    mobile: new MobileQuantumManager()
+                };
+                console.log('NFL Quantum components initialized');
+            } catch (error) {
+                console.error('Error initializing NFL Quantum:', error);
+            }
+        });
     </script>
 </body>
 </html>

@@ -1,17 +1,7 @@
-# 🛡️ Security-related
-*.key
-*.pem
-.env
-.env.*
-credentials/
-secrets/
-*password*
-*secret*
-
-# 🧪 Development
+# Python
 __pycache__/
 *.py[cod]
-*.class
+*$py.class
 *.so
 .Python
 build/
@@ -30,21 +20,44 @@ wheels/
 .installed.cfg
 *.egg
 
-# 📊 Data and logs
-logs/
-*.log
-data/raw/
-data/processed/
-*.dat
+# Virtual Environment
+venv/
+env/
+ENV/
 
-# 🎵 IDE specific
+# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
-*~
 
-# 🌟 Quantum specific
-qiskit-jobs/
-quantum-states/
-calibration-data/
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Project specific
+*.log
+.env
+.env.local
+node_modules/
+.next/
+out/
+.vercel
+.netlify
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
